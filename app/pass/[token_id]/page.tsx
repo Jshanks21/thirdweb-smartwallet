@@ -79,6 +79,16 @@ const NFTDetails = () => {
                         email: email.data,
                       }}
                       onPaymentSuccess={handlePaymentSuccess}
+                      options={
+                        {
+                          colorBackground: "#A99EFF",
+                          colorPrimary: "#5E0080",
+                          colorText: "#000000",
+                          inputBorderColor: "#FFFFFF",
+                          inputBackgroundColor: "#FFFFFF",
+                          borderRadius: 6
+                        }
+                      }
                     />
                   </div>
                 ) : (

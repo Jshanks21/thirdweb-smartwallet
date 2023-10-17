@@ -1,29 +1,29 @@
 'use client'
 
-import { NFT_ADDRESS } from '@/utils/constants';
 import {
   ThirdwebNftMedia,
-  useContract,
   useNFTs,
-  useAddress,
-  useOwnedNFTs
+  useOwnedNFTs,
+  useContract,
+  useAddress
 } from "@thirdweb-dev/react";
+import { NFT_ADDRESS } from '@/utils/constants'
 import Link from 'next/link';
 
 function NFTDisplay() {
   const address = useAddress();
   const { contract } = useContract(NFT_ADDRESS);
   const { data: ownedNFTs } = useOwnedNFTs(contract, address);
-  const { data: nft, isLoading, error } = useNFTs(contract);
+  const { data: nfts, isLoading, error } = useNFTs(contract);
 
   // Handle UI on loading or error
   if (isLoading) return <div>Loading...</div>;
-  if (error || !nft) return <div>NFT not found</div>;
+  if (error || !nfts) return <div>NFT not found</div>;
 
   // Add quantityOwned to each NFT if applicable
-  const updatedNFTs = nft.map(nftItem => {
+  const updatedNFTs = nfts && nfts.map(nftItem => {
     if (!ownedNFTs) return nftItem;
-    const ownedNFTItem = ownedNFTs.find(owned => owned.metadata.id === nftItem.metadata.id);
+    const ownedNFTItem = ownedNFTs.find((owned: any) => owned.metadata.id === nftItem.metadata.id);
 
     if (ownedNFTItem) {
       return { ...nftItem, quantityOwned: ownedNFTItem.quantityOwned };

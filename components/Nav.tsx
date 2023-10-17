@@ -29,7 +29,7 @@ const Nav = () => {
           height={30}
           className='object-contain'
         />
-        <p className='logo_text'>Dakan</p>
+        <p className='logo_text'>Memberbilia</p>
       </Link>      
 
       <div className='flex relative'>
